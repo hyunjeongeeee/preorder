@@ -1,10 +1,10 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.1.12-SNAPSHOT'
+	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'com.preorder'
+group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -19,8 +19,6 @@ configurations {
 
 repositories {
 	mavenCentral()
-	maven { url 'https://repo.spring.io/milestone' }
-	maven { url 'https://repo.spring.io/snapshot' }
 }
 
 dependencies {
@@ -28,10 +26,12 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-tasks.named('bootBuildImage') {
-	builder = 'paketobuildpacks/builder-jammy-base:latest'
+	// DB
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	// JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// Email 인증
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {

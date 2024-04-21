@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/preorder
+    username: admin
+    password: 1234
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: none # or update, create-drop, validate
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
