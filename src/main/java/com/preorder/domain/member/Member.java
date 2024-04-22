@@ -1,22 +1,21 @@
 package com.preorder.domain.member;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 @Getter
+@Setter
 @SuperBuilder
 @Entity
 @Table(name = "member")
 @NoArgsConstructor
-@AllArgsConstructor
 @DynamicInsert // 엔티티를 save할 때 null 값은 배제하고 insert 쿼리를 날리도록 한다.
-public class Member {
+public class Member{
 
     @Id // Primary Key 지정
     // AUTO_INCREMENT 설정 (id값이 null일 경우 자동 생성)
@@ -29,8 +28,14 @@ public class Member {
     @Column(nullable = false)
     private String memberPw;
 
+    @Column
+    private Role role;
+    /*
     @Column(nullable = false)
     private String memberName;
+
+    @Column(nullable = false)
+    private String memberAddr;
 
     private LocalDate memberBirth;
 
@@ -42,12 +47,12 @@ public class Member {
 
     @Column(nullable = false)
     private LocalDate memberSignDate;
-    /**
+    *//**
      * PrePersist
      * => insert 되기전 (persist 되기전) 실행된다.
-     * */
+     * *//*
     @PrePersist
-    void prePersistMemberSignDate() {
+    void onPrePersist() {
         if (memberSignDate == null)  memberSignDate = LocalDate.now();
     }
 
@@ -58,5 +63,12 @@ public class Member {
     @ColumnDefault("'Y'")
     private String memberStatus;
 
+
+    @Enumerated(EnumType.STRING)
+    private Role role;*/
+
+//    public void encodePassword(PasswordEncoder passwordEncoder){
+//        this.memberPw = passwordEncoder.encode(memberPw);
+//    }
 }
 
