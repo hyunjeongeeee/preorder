@@ -27,6 +27,9 @@ public class Product {
     private int pdStock;
 
     @Column(nullable = false)
+    private int pdDescription;
+
+    @Column(nullable = false)
     private LocalDate pdAddDate;
 
     @PrePersist
