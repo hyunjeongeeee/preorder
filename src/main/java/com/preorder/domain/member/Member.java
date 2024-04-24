@@ -20,7 +20,7 @@ public class Member{
     @Id // Primary Key 지정
     // AUTO_INCREMENT 설정 (id값이 null일 경우 자동 생성)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberNo;
+    private long memberNo;
 
     @Column(nullable = false)
     private String memberId;
