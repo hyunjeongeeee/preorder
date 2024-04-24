@@ -13,10 +13,22 @@ public class ProductDTO {
     private String pdName;
     private int pdPrice;
     private int pdStock;
-    private int pdDescription;
+    private String pdDescription;
     private LocalDate pdAddDate;
     private LocalDate pdUpdate;
     private String categoryCode;
     private  String pdStatus;
+
+    // 노출시킬 정보
+    public ProductDTO findAllProduct(String pdName, int pdPrice, String pdDescription, String pdStatus) {
+        this.pdName = pdName;
+        this.pdPrice = pdPrice;
+        this.pdDescription = pdDescription;
+        this.pdStatus = pdStatus;
+
+        return this;
+
+    }
+
 
 }

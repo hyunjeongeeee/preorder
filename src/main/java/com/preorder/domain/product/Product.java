@@ -26,16 +26,11 @@ public class Product {
     @Column(nullable = false)
     private int pdStock;
 
-    @Column(nullable = false)
-    private int pdDescription;
+    @Column(nullable = false, length=2000)
+    private String pdDescription;
 
     @Column(nullable = false)
     private LocalDate pdAddDate;
-
-    @PrePersist
-    void onPrePersist() {
-        if (pdAddDate == null)  pdAddDate = LocalDate.now();
-    }
 
     @Column(nullable = true)
     private LocalDate pdUpdate;
@@ -45,4 +40,10 @@ public class Product {
 
     @Column(nullable = false)
     private  String pdStatus;
+
+    @PrePersist
+    void onPrePersist() {
+        if (pdAddDate == null)  pdAddDate = LocalDate.now();
+    }
+
 }
