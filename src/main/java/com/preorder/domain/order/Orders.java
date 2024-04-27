@@ -1,65 +1,52 @@
 package com.preorder.domain.order;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CurrentTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDate;
 
 @Getter
-@SuperBuilder
 @Entity
-@Table(name = "orders")
+@Table(name = "ORDERS")
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicInsert // 엔티티를 save할 때 null 값은 배제하고 insert 쿼리를 날리도록 한다.
 public class Orders {
 
-    @Id // Primary Key 지정
-    // AUTO_INCREMENT 설정 (id값이 null일 경우 자동 생성)
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long orderId;
-    @Column(nullable = false)
-    private String memberId;
+    @Column(name = "ORDER_ID")
+    private int orderId;
 
-    @Column(nullable = false)
-    private String orderName;
+    @Column(name = "PD_ID", nullable = false)
+    private int pdId;
 
-    @Column(nullable = false)
+    @Column(name = "MEMBER_NO", nullable = false)
+    private int memberNo;
+
+    @Column(name = "ORDER_ADDR", nullable = false, length = 500)
     private String orderAddr;
 
-    @Column(nullable = false)
+    @Column(name = "ORDER_PHONE", nullable = false, length = 100)
     private String orderPhone;
 
-    @Column(nullable = false)
+    @Column(name = "ORDER_MEMO", length = 1000)
     private String orderMemo;
 
-    @Column(nullable = true)
-    private String shipMemo;
+    @Column(name = "ORDER_PRICE", nullable = false)
+    private int orderPrice;
 
-    @Column(nullable = false)
-    private int shipPrice;
-
-    @Column(nullable = false)
-    private int orderPayment;
-
-    @Column(nullable = false)
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CurrentTimestamp
+    @Column(name = "ORDER_DATE", nullable = false)
     private LocalDate orderDate;
 
-    @Column(nullable = false)
-    @ColumnDefault("'Y'")
-    private String orderStatus;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ORDER_STATUS", nullable = false)
+    private OrderStatus orderStatus;
 
-
-    @PrePersist
-    void onPrePersist() {
-        if (orderDate == null)  orderDate = LocalDate.now();
-        if (orderStatus == null)  orderStatus = "Y";
-    }
 }

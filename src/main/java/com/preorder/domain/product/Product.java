@@ -2,48 +2,30 @@ package com.preorder.domain.product;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import java.time.LocalDate;
-
-
-@ToString
-@Table(name = "product")
+@Table(name = "PRODUCT")
 @NoArgsConstructor
 @Entity
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT 설정 (id값이 null일 경우 자동 생성)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PD_ID")
     private int pdId;
 
-    @Column(nullable = false)
+    @Column(name = "MEMBER_ID", nullable = false, length = 100)
+    private String memberId;
+
+    @Column(name = "PD_NAME", nullable = false, length = 500)
     private String pdName;
 
-    @Column(nullable = false)
+    @Column(name = "PD_PRICE", nullable = false)
     private int pdPrice;
 
-    @Column(nullable = false)
+    @Column(name = "PD_STOCK", nullable = false)
     private int pdStock;
 
-    @Column(nullable = false, length=2000)
+    @Column(name = "PD_DESCRIPTION", length = 1000)
     private String pdDescription;
-
-    @Column(nullable = false)
-    private LocalDate pdAddDate;
-
-    @Column(nullable = true)
-    private LocalDate pdUpdate;
-
-    @Column(nullable = false)
-    private String categoryCode;
-
-    @Column(nullable = false)
-    private  String pdStatus;
-
-    @PrePersist
-    void onPrePersist() {
-        if (pdAddDate == null)  pdAddDate = LocalDate.now();
-    }
 
 }

@@ -1,74 +1,81 @@
 package com.preorder.domain.member;
 
+import com.preorder.web.common.EncryptionUtils;
+import com.preorder.web.member.dto.MemberDTO;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.LocalDate;
 @Getter
-@Setter
-@SuperBuilder
 @Entity
-@Table(name = "member")
+@Table(name = "MEMBER",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "member_join_unique",
+                        columnNames = {
+                                "member_id",
+                                "member_email"
+                        }
+                ),
+        }
+)
 @NoArgsConstructor
 @DynamicInsert // 엔티티를 save할 때 null 값은 배제하고 insert 쿼리를 날리도록 한다.
 public class Member{
 
-    @Id // Primary Key 지정
-    // AUTO_INCREMENT 설정 (id값이 null일 경우 자동 생성)
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MEMBER_NO")
     private long memberNo;
 
-    @Column(nullable = false)
+    @Column(name = "MEMBER_ID", nullable = false, length = 100)
     private String memberId;
 
-    @Column(nullable = false)
+    @Column(name = "MEMBER_PW", nullable = false, length = 100)
     private String memberPw;
 
-    @Column
-    private Role role;
-    /*
-    @Column(nullable = false)
+    @Column(name = "MEMBER_NAME", nullable = false, length = 100)
     private String memberName;
 
-    @Column(nullable = false)
+    @Column(name = "MEMBER_ADDR", length = 500)
     private String memberAddr;
 
-    private LocalDate memberBirth;
-
-    @Column(nullable = false)
+    @Column(name = "MEMBER_EMAIL", nullable = false, length = 100)
     private String memberEmail;
 
-    @Column(nullable = false)
+    @Column(name = "MEMBER_PHONE", nullable = false, length = 100)
     private String memberPhone;
 
-    @Column(nullable = false)
-    private LocalDate memberSignDate;
-    *//**
-     * PrePersist
-     * => insert 되기전 (persist 되기전) 실행된다.
-     * *//*
-    @PrePersist
-    void onPrePersist() {
-        if (memberSignDate == null)  memberSignDate = LocalDate.now();
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ROLE", nullable = false, length = 100)
+    private Role role;
+
+    @Transient
+    private EncryptionUtils encryptionUtils;
+
+
+    public EncryptionUtils encryption(EncryptionUtils encryptionUtils) {
+        this.encryptionUtils = encryptionUtils;
+        return encryptionUtils;
     }
 
-    @Column(nullable = true)
-    private LocalDate memberDelDate;
+    public Member(MemberDTO memberDTO){}
 
-    @Column(nullable = true)
-    @ColumnDefault("'Y'")
-    private String memberStatus;
+    @Builder
+    public Member(long memberNo, String memberId, String memberPw, String memberName,
+                  String memberAddr, String memberEmail, String memberPhone, Role role,
+                  EncryptionUtils encryptionUtils) {
+        this.memberNo = memberNo;
+        this.memberId = memberId;
+        this.memberPw = memberPw;
+        this.memberName = memberName;
+        this.memberAddr = memberAddr;
+        this.memberEmail = memberEmail;
+        this.memberPhone = memberPhone;
+        this.encryptionUtils = encryptionUtils;
+        this.role = role;
+    }
 
 
-    @Enumerated(EnumType.STRING)
-    private Role role;*/
 
-//    public void encodePassword(PasswordEncoder passwordEncoder){
-//        this.memberPw = passwordEncoder.encode(memberPw);
-//    }
 }
-
