@@ -6,8 +6,8 @@ FROM openjdk:21
 ARG JAR_FILE=/build/libs/demo-0.0.1-SNAPSHOT.jar
 
 # 컨테이너 내부에 JAR_FILE 복사 -> 컨테이너 내부에 demo-springboot.jar 가 생성됨
-#COPY ${JAR_FILE} demo-springboot.jar
-COPY ./build/libs/demo-0.0.1-SNAPSHOT.jar ./build/libs/demo-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} demo-springboot.jar
+#COPY ./build/libs/demo-0.0.1-SNAPSHOT.jar ./build/libs/demo-0.0.1-SNAPSHOT.jar
 # 컨테이너가 시작될 때 실행할 명령어 지정
 # java -jar demo-springboot.jar 명령어를 실행해 SpringBoot 애플리케이션 구동
 ENTRYPOINT ["java","-jar","demo-springboot.jar"]

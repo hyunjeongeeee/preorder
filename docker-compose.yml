@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  db:
+  mysql-db:
     image: mysql:8.0.28
     container_name: mysql-db-container
     restart: always
@@ -12,12 +12,29 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: 1234
       TZ: Asia/Seoul
-    volumes:
-      - ./db/mysql/data:/var/lib/mysql
-      - ./db/mysql/config:/etc/mysql/conf.d
-      - ./db/mysql/init:/docker-entrypoint-initdb.d
-
-
+#    volumes:
+#      - ./db/mysql/data:/var/lib/mysql
+#      - ./db/mysql/config:/etc/mysql/conf.d
+#      - ./db/mysql/init:/docker-entrypoint-initdb.d
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+  springboot:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: springboot-app
+    ports:
+      - "8070:8070"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db-container:3306/preorder
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: 1234
+    depends_on:
+      - mysql-db
+      - redis
 
 
 
