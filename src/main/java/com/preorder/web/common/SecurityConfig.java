@@ -1,6 +1,7 @@
 package com.preorder.web.common;
 
 import com.preorder.web.member.jwt.LoginFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,12 +10,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.encrypt.AesBytesEncryptor;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+
+    // 대칭키
+    @Value("${symmetric.key}")
+    private String symmetrickey;
 
     private final AuthenticationConfiguration authenticationConfiguration;
 
@@ -34,6 +40,12 @@ public class SecurityConfig {
     }
 
 
+    // AesBytesEncryptor 사용을 위한 Bean등록
+    @Bean
+    public AesBytesEncryptor aesBytesEncryptor() {
+        return new AesBytesEncryptor(symmetrickey,"70726574657374");
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -48,11 +60,13 @@ public class SecurityConfig {
                 .httpBasic((auth) -> auth.disable());
 
         // 경로별 인가작업
-        http
-                .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/", "join").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
-                        .anyRequest().authenticated());
+//        http
+//                .authorizeHttpRequests((auth) -> auth
+//                        .requestMatchers("/login", "/", "join").permitAll()
+//                        .requestMatchers("/admin").hasRole("ADMIN")
+//                        .anyRequest().authenticated());
+        http.authorizeHttpRequests((auth) -> auth
+                .anyRequest().permitAll());
 
         // 필터 추가 LoginFilter()는 인자를 받음authenticationManager() 메소드에 authenticationConfiguration 인자
         http
@@ -62,9 +76,6 @@ public class SecurityConfig {
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-
-
 
         return http.build();
     }

@@ -1,28 +1,28 @@
 package com.preorder.web.member.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.preorder.domain.member.Role;
+import com.preorder.web.common.EncryptionUtils;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Getter
+@Setter
 public class MemberDTO {
 
-    private Long memberNo;
+    private long memberNo;
     private String memberId;
     private String memberPw;
     private String memberName;
-    private LocalDate memberBirth;
+    private String memberAddr;
     private String memberEmail;
     private String memberPhone;
-    private LocalDate memberSignDate;
-    private LocalDate memberDelDate;
-    private String memberStatus;
+    private Role role;
+    private EncryptionUtils encryptionUtils;
+
+    public MemberDTO() {}
+
+
 
 
 }
