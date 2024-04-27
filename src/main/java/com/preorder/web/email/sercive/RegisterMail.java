@@ -1,4 +1,4 @@
-package com.preorder.web.email.email.sercive;
+package com.preorder.web.email.sercive;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

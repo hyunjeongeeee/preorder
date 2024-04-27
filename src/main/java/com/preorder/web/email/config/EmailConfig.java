@@ -1,4 +1,4 @@
-package com.preorder.web.email.email.config;
+package com.preorder.web.email.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +14,6 @@ public class EmailConfig {
     public JavaMailSender NaverMailService(){
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
-        javaMailSender.setHost("smtp.gmail.com");  // SMTP 서버명
-        javaMailSender.setUsername("hyunjeong9592@gamil.com"); // 구글 아이디
-        javaMailSender.setPassword("vuss gnwh oasy vlwx"); // 구글 비밀번호
 
         javaMailSender.setPort(465); // SMTP 포트
 

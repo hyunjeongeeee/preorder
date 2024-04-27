@@ -1,4 +1,4 @@
-package com.preorder.web.email.email.sercive;
+package com.preorder.web.email.sercive;
 
 import org.springframework.stereotype.Service;
 

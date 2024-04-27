@@ -1,6 +1,6 @@
-package com.preorder.web.email.email.controller;
+package com.preorder.web.email.controller;
 
-import com.preorder.web.email.email.sercive.RegisterMail;
+import com.preorder.web.email.sercive.RegisterMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
