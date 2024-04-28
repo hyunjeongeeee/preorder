@@ -5,8 +5,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/preorder
-    username:
-    password:
+    username: admin
+    password: 1234
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -21,6 +21,11 @@ spring:
         format_sql: true
         show_sql: true
   #    default_batch_fetch_size: 1000
+  mail:
+    host: smtp.gmail.com
+    username: hyunjeong9592@gamil.com
+    password: vussgnwhoasyvlwx
+    port: 465
 security:
   jwt:
     header: Authorization

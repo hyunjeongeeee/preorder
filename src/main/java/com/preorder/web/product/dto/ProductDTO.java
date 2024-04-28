@@ -19,7 +19,6 @@ public class ProductDTO {
     private String categoryCode;
     private  String pdStatus;
 
-    // 노출시킬 정보
     public ProductDTO findAllProduct(String pdName, int pdPrice, String pdDescription, String pdStatus) {
         this.pdName = pdName;
         this.pdPrice = pdPrice;
