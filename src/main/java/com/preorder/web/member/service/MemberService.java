@@ -1,9 +1,14 @@
 package com.preorder.web.member.service;
 
 import com.preorder.domain.member.Member;
+import com.preorder.domain.member.QMember;
 import com.preorder.web.common.EncryptionUtils;
 import com.preorder.web.member.dto.MemberDTO;
 import com.preorder.web.member.repository.MemberRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.querydsl.jpa.impl.JPAUpdateClause;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +20,13 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final EncryptionUtils encryptionUtils;
+    private final EntityManager entityManager;
 
-    public MemberService(MemberRepository memberRepository, EncryptionUtils encryptionUtils) {
+    public MemberService(MemberRepository memberRepository, EncryptionUtils encryptionUtils, EntityManager entityManager) {
         this.memberRepository = memberRepository;
         this.encryptionUtils = encryptionUtils;
         this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
+        this.entityManager = entityManager;
     }
 
     /**
@@ -92,39 +98,39 @@ public class MemberService {
         }
     }
 
-
    /**
     * 회원정보 수정
     * */
+   @Transactional
    public Member memberUpdateProcess(Member member) {
+       // Querydsl JPA 엔티티 매니저 및 쿼리 팩토리 설정
+       JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+        // 멤버 엔티티를 위한 QMember 인스턴스 생성
+       QMember qMember = QMember.member;
+        // 동적으로 업데이트 문 생성을 위한 JPAUpdateClause 초기화
+       JPAUpdateClause update = queryFactory.update(qMember);
+        Member data = memberInfoProcess(member.getMemberId(), member.getMemberPw());
+        long memberNo = data.getMemberNo();
+       String addr = member.getMemberAddr();
+       String phone = member.getMemberPhone();
 
-       Member data = memberInfoProcess(member.getMemberId(), member.getMemberPw());
-        //  주소, 전화번호 => null 인 경우 수정 X
-        String originAddr =  data.getMemberAddr();
-        String originPhone = data.getMemberPhone();
-        System.out.println("originAddr: " + originAddr);
-        System.out.println("originPhone : " + originPhone);
-
-        // 입력받은 데이터
-        String addr = member.getMemberAddr();
-        String phone = member.getMemberPhone();
-        System.out.println("addr: " + addr);
-        System.out.println("phone: " + phone);
-
-      if(!originAddr.equals(addr) || addr != null) {
-            addr = encryptionUtils.encrypt(addr);
-      }
-
-       if(!originPhone.equals(phone) || phone !=null) {
+       //  주소, 전화번호 => null 인 경우 수정 X
+       // 동적 조건 생성
+       if (phone != null) {
            phone = encryptionUtils.encrypt(phone);
+           update.set(qMember.memberPhone, phone);
+       }
+       if (addr != null) {
+           addr = encryptionUtils.encrypt(addr);
+           update.set(qMember.memberAddr, addr);
        }
 
-       memberRepository.updateMemberInfo(phone, addr, member.getMemberNo());
-
-
-
+       // 변경 조건이 하나 이상 있을 때만 실행
+       if (phone != null || addr != null) {
+           update.where(qMember.memberNo.eq(memberNo))
+                   .execute();
+       }
        return member;
-
    }
 
 

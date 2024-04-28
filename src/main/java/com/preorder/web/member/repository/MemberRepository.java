@@ -18,12 +18,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {  // JpaR
 
     Optional<Member> findByMemberId(String memberId);   // where 조건절에 넣어 데이터를 가져올 수 있도록 findByMemberId 정의
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE Member m SET m.memberPhone = :phone, m.memberAddr = :addr WHERE m.memberNo = :memberNo")
-    void updateMemberInfo(String phone, String addr, long memberNo);
-
-
     List<Member> findAll(); // 전체 조회
 
     Boolean existsByMemberId(String memberId);
