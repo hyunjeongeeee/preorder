@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 
 *.properties
-/src/main/resources/config/
+member-service/src/main/resources/config/
 /db
 
 
