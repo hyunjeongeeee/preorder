@@ -3,6 +3,7 @@ package com.preorder.web.member.service;
 import com.preorder.domain.member.Member;
 import com.preorder.web.member.dto.CustomUserDetails;
 import com.preorder.web.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

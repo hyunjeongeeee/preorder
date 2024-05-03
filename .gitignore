@@ -7,7 +7,7 @@ build/
 
 *.properties
 member-service/src/main/resources/config/
-/db
+
 
 
 ### STS ###

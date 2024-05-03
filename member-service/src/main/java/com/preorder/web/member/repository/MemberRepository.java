@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {  // JpaRepository를 상속하여 사용. <객체, ID>
 
-    Member findByMemberNo (long memberNo);
+    Member findByMemberNo(long memberNo);
 
     Optional<Member> findByMemberId(String memberId);   // where 조건절에 넣어 데이터를 가져올 수 있도록 findByMemberId 정의
 

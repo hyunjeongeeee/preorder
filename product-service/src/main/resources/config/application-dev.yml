@@ -4,7 +4,7 @@ spring:
       mode: always
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/preorder
+    url: jdbc:mysql://localhost:3306/product
     username: admin
     password: 1234
   jpa:
@@ -15,7 +15,7 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true
@@ -31,8 +31,3 @@ security:
     header: Authorization
     secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
     token-validity-in-seconds: 86400
-
-#logging.level:
-#  org.hibernate.SQL: debug
-#  org.hibernate.type: trace
-#    # parameter Binding

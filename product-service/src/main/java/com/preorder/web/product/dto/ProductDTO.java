@@ -13,9 +13,6 @@ public class ProductDTO {
     private String pdName;
     private int pdPrice;
     private int pdStock;
-    private String pdDescription;
-    private LocalDate pdAddDate;
-    private LocalDate pdUpdate;
     private String categoryCode;
     private  String pdStatus;
 

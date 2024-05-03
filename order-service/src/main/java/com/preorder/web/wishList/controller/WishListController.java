@@ -5,7 +5,7 @@ import com.preorder.web.wishList.service.WishListService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/wish")
+@RequestMapping("/wishList")
 public class WishListController {
 
     private final WishListService wishListService;
@@ -22,15 +22,6 @@ public class WishListController {
         wishListService.addCartProcess(wishList);
         return  "success";
     }
-//
-//    @GetMapping("/view")
-//    public ResponseEntity<?> viewCart(@RequestParam("member") long memberNo) {
-//        List<WishListDTO.WishListViewDTO> list =  wishListService.viewWishList(memberNo);
-//        System.out.println("memberNo : " + memberNo);
-//        return ResponseEntity.ok(list);
-//    }
-
-
 
 
 }

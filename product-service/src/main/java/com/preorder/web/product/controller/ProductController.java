@@ -2,7 +2,6 @@ package com.preorder.web.product.controller;
 
 import com.preorder.domain.product.Product;
 import com.preorder.web.product.service.ProductService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +21,8 @@ public class ProductController {
      * 상품 1개 조회
      * + 상품 상세보여주기
      */
-    @GetMapping("")
-    public ResponseEntity<?> getProductById(@RequestParam("id") int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable("id") int id) {
         Product product =  productService.findOneProcess(id);
         return ResponseEntity.ok(product + product.toString());
     }
@@ -36,7 +35,5 @@ public class ProductController {
         List<Product> list = productService.findAllProcess();
         return ResponseEntity.ok(list);
     }
-
-
 
 }

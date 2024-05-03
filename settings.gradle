@@ -9,4 +9,7 @@ rootProject.name='preorder-service'
 include ('member-service')
 include ('product-service')
 include ('order-service')
+include ('eureka-server')
+include ('core-module')
+
 

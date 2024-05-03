@@ -11,7 +11,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -22,12 +21,16 @@ public class MemberService {
     private final EncryptionUtils encryptionUtils;
     private final EntityManager entityManager;
 
-    public MemberService(MemberRepository memberRepository, EncryptionUtils encryptionUtils, EntityManager entityManager) {
+
+
+    public MemberService(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
+                         EncryptionUtils encryptionUtils ,EntityManager entityManager) {
         this.memberRepository = memberRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.encryptionUtils = encryptionUtils;
-        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
         this.entityManager = entityManager;
     }
+
 
     /**
      *   회원가입
@@ -55,6 +58,7 @@ public class MemberService {
                 .memberAddr(encryptionUtils.encrypt(address))
                 .build();
         memberRepository.save(data);
+
     }
 
     /**

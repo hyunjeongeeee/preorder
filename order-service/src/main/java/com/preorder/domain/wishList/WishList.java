@@ -28,9 +28,8 @@ public class WishList {
     @Column(name = "PD_COUNT", nullable = false)
     private int pdCount;
 
-    @Builder
     public WishList (WishListDTO wishListDTO) {
-        wishId = wishListDTO.getWishId();
+//        wishId = wishListDTO.getWishId();
         pdId = wishListDTO.getPdId();
         memberNo = wishListDTO.getMemberNo();
         opId = wishListDTO.getOpId();
@@ -41,7 +40,7 @@ public class WishList {
 
 
     @Builder
-    public WishList(int pdId, long memberNo, int opId, int pdCount) {
+    public WishList( int pdId, long memberNo, int opId, int pdCount) {
 //        this.wishId = wishId;
         this.pdId = pdId;
         this.memberNo = memberNo;

@@ -20,11 +20,11 @@ configurations {
 	}
 }
 
-//dependencyManagement {
-//	imports {
-//		mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-//	}
-//}
+dependencyManagement {
+	imports {
+		mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+	}
+}
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -67,9 +67,10 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude group: "org.junit.vintage", module: "junit-vintage-engine"
 	}
+
+
 	// open feign
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0'
-
 }
 
 
@@ -77,19 +78,3 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-//// queryDSL 추가 : QueryDSL 빌드 옵션
-//def querydslDir = "$buildDir/generated/querydsl"
-//
-//querydsl {
-//	jpa = true
-//	querydslSourcesDir = querydslDir
-//}
-//sourceSets {
-//	main.java.srcDir querydslDir
-//}
-//configurations {
-//	querydsl.extendsFrom compileClasspath
-//}
-//compileQuerydsl {
-//	options.annotationProcessorPath = configurations.querydsl
-//}

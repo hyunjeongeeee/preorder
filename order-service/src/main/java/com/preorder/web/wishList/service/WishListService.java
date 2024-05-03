@@ -11,10 +11,25 @@ import java.util.Optional;
 public class WishListService {
 
     private final WishListRepository wishListRepository;
+    private final MemberClient memberClient;
 
-    public WishListService(WishListRepository wishListRepository) {
+    public WishListService(WishListRepository wishListRepository, MemberClient memberClient) {
         this.wishListRepository = wishListRepository;
+        this.memberClient = memberClient;
     }
+
+
+
+
+
+
+    // 위시리스트 1개 추가해보기 테스트
+//    public int writeBoard(long memberNo, int pdId, WishListDTO.WishRequest request) {
+//        // memberId를 어떻게 가져올까?
+//        final WishList wishList = new WishList(pdId, memberNo, request.getPdId(), request.getOpId());
+//        final WishList result =  wishListRepository.save(wishList);
+//        return result.getWishId(); // wishlist id 반환되는지 확인하기
+//    }
 
     /**
      * 위시리스트에 상품 추가하기
@@ -41,11 +56,6 @@ public class WishListService {
         }
     }
 
-    /**
-     * 해당 회원 (memberNo로 검색)
-     * 위시리스트에 있는
-     * 상품 조회해보기
-     * */
 
 
 

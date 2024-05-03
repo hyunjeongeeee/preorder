@@ -1,15 +1,11 @@
 package com.preorder.web.product.service;
 
 import com.preorder.domain.product.Product;
-import com.preorder.web.product.dto.ProductDTO;
 import com.preorder.web.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,9 +28,5 @@ public class ProductService {
         return productRepository.findAll();
 
     }
-
-
-
-
 
 }

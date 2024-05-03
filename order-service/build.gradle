@@ -21,11 +21,11 @@ configurations {
 	}
 }
 
-//dependencyManagement {
-//     imports {
-//        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-//        }
-//    }
+dependencyManagement {
+     imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+    }
 
 
 
@@ -67,5 +67,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-

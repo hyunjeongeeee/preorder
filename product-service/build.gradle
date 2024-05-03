@@ -21,11 +21,11 @@ configurations {
 	}
 }
 
-//dependencyManagement {
-//	imports {
-//		mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-//	}
-//}
+dependencyManagement {
+	imports {
+		mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+	}
+}
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -39,9 +39,9 @@ dependencies {
 	// Spring Context Support
 	implementation 'org.springframework:spring-context-support:5.3.9'
 	//redis 추가
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.3'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+//	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.3'
+//	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 	// QueryDSL - 스프링 부트 3.0 이상
 //	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
@@ -65,5 +65,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-

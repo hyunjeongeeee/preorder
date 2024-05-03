@@ -4,18 +4,18 @@ spring:
       mode: always
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/preorder
+    url: jdbc:mysql://localhost:3306/member
     username: admin
     password: 1234
   jpa:
     database: mysql
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     defer-datasource-initialization: true
     generate-ddl: true
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true

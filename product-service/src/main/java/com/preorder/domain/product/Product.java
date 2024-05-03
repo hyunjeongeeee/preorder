@@ -13,9 +13,6 @@ public class Product {
     @Column(name = "PD_ID")
     private int pdId;
 
-    @Column(name = "MEMBER_ID", nullable = false, length = 100)
-    private String memberId;
-
     @Column(name = "PD_NAME", nullable = false, length = 500)
     private String pdName;
 
@@ -27,5 +24,8 @@ public class Product {
 
     @Column(name = "PD_DESCRIPTION", length = 1000)
     private String pdDescription;
+
+    @Column(name = "PD_STATUS", length = 1)
+    private String pdStatus;
 
 }
