@@ -1,27 +1,21 @@
 package com.preorder.web.wishList.service;
 
 import com.preorder.domain.wishList.WishList;
+import com.preorder.web.wishList.dto.WishListDTO;
 import com.preorder.web.wishList.repository.WishListRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class WishListService {
 
     private final WishListRepository wishListRepository;
     private final MemberClient memberClient;
-
-    public WishListService(WishListRepository wishListRepository, MemberClient memberClient) {
-        this.wishListRepository = wishListRepository;
-        this.memberClient = memberClient;
-    }
-
-
-
-
-
 
     // 위시리스트 1개 추가해보기 테스트
 //    public int writeBoard(long memberNo, int pdId, WishListDTO.WishRequest request) {
@@ -33,7 +27,7 @@ public class WishListService {
 
     /**
      * 위시리스트에 상품 추가하기
-     *  + 담겨있는 상품일 경우 수량 업데이트
+     *  + 담겨있는 상품일 경우 수량 업데이트(상품수량 변경)
      * */
     @Transactional
     public void addCartProcess(WishList wishList) {
@@ -43,18 +37,43 @@ public class WishListService {
         int opId = wishList.getOpId();
         int pdCount = wishList.getPdCount();
 
-        Optional<WishList> data = wishListRepository.findByMemberNoAndPdId(memberNo, pdId);
+        WishList data = wishListRepository.findByMemberNoAndPdIdAndOpId(memberNo, pdId, opId);
 
-        if (data.isPresent()) {
-            WishList existingWishList = data.get();
-            int pdTotalCount = existingWishList.getPdCount() + pdCount;
-            existingWishList.setPdCount(pdTotalCount); // 기존 엔티티 수정
-        } else {
+        if (data != null) {
+            int pdTotalCount = data.getPdCount() + pdCount;
+            data.setPdCount(pdTotalCount); // 기존 엔티티 수정
+        }
             // 새로운 위시리스트 항목을 생성하는 로직 (옵셔널)
             WishList newWishList = new WishList(pdId, memberNo, opId, pdCount);
             wishListRepository.save(newWishList);
-        }
+
     }
+
+    /**
+     * 회원정보(PK)로 검색한 위시리스트 전체 목록
+     * */
+    public List<WishList> getWishList(long memberNo) {
+        List<WishList> list = wishListRepository.findAllByMemberNo(memberNo);
+        return list;
+    }
+
+
+    /**
+     * WishId(PK)로 위시리스트 항목 삭제
+     * */
+    @Transactional
+    public void deleteWishList(int wishId) {
+        wishListRepository.deleteByWishId(wishId);
+    }
+
+
+
+
+    // 서비스간 요청 내부적인
+    // 사용자가 접근하는 url 사용자 요청
+
+
+
 
 
 

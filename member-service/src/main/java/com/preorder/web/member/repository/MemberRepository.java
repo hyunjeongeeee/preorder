@@ -11,15 +11,15 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {  // JpaRepository를 상속하여 사용. <객체, ID>
 
-    Member findByMemberNo(long memberNo);
+    Member findByMemberId(long memberId);
 
-    Optional<Member> findByMemberId(String memberId);   // where 조건절에 넣어 데이터를 가져올 수 있도록 findByMemberId 정의
+    Optional<Member> findByMemberNickname(String memberNickname);   // where 조건절에 넣어 데이터를 가져올 수 있도록 findByMemberNickname 정의
 
     List<Member> findAll(); // 전체 조회
 
-    Boolean existsByMemberId(String memberId);
+    Boolean existsByMemberNickname(String memberNickname);
 
-    Optional<Member> findByMemberIdAndMemberPw(String memberId, String memberPw);
+    Optional<Member> findByMemberNicknameAndMemberPw(String memberNickname, String memberPw);
 }
 
 

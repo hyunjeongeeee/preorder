@@ -13,10 +13,10 @@ import org.hibernate.annotations.DynamicInsert;
 @Table(name = "MEMBER",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "member_join_unique",
+                        name = "MEMBER_JOIN_UNIQUE",
                         columnNames = {
-                                "member_id",
-                                "member_email"
+                                "MEMBER_NICKNAME",
+                                "MEMBER_EMAIL"
                         }
                 ),
         }
@@ -27,11 +27,11 @@ public class Member{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_NO")
-    private long memberNo;
+    @Column(name = "MEMBER_ID")
+    private long memberId;
 
-    @Column(name = "MEMBER_ID", nullable = false, length = 100)
-    private String memberId;
+    @Column(name = "MEMBER_NICKNAME", nullable = false, length = 100)
+    private String memberNickname;
 
     @Column(name = "MEMBER_PW", nullable = false, length = 100)
     private String memberPw;
@@ -64,11 +64,11 @@ public class Member{
     public Member(MemberDTO memberDTO){}
 
     @Builder
-    public Member(long memberNo, String memberId, String memberPw, String memberName,
+    public Member(long memberId, String memberNickname, String memberPw, String memberName,
                   String memberAddr, String memberEmail, String memberPhone, Role role,
                   EncryptionUtils encryptionUtils) {
-        this.memberNo = memberNo;
         this.memberId = memberId;
+        this.memberNickname = memberNickname;
         this.memberPw = memberPw;
         this.memberName = memberName;
         this.memberAddr = memberAddr;

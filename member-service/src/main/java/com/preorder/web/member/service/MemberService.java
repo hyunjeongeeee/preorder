@@ -36,21 +36,21 @@ public class MemberService {
      *   회원가입
      */
     public void joinProcess(MemberDTO memberDTO) {
-        String id = memberDTO.getMemberId();
+        String nickName = memberDTO.getMemberNickname();
         String password = memberDTO.getMemberPw();
         String email = memberDTO.getMemberEmail();
         String phone = memberDTO.getMemberPhone();
         String address = memberDTO.getMemberAddr();
         String name = memberDTO.getMemberName();
 
-        Boolean isExist = memberRepository.existsByMemberId(id);
+        Boolean isExist = memberRepository.existsByMemberNickname(nickName);
 
         if (isExist) {
             return ;
         }
         Member data = new Member();
         data = Member.builder()
-                .memberId(id)
+                .memberNickname(nickName)
                 .memberPw(bCryptPasswordEncoder.encode(password))
                 .memberName(encryptionUtils.encrypt(name))
                 .memberEmail(encryptionUtils.encrypt(email))
@@ -58,6 +58,7 @@ public class MemberService {
                 .memberAddr(encryptionUtils.encrypt(address))
                 .build();
         memberRepository.save(data);
+        System.out.println("저장된 회원 정보 : "+data);
 
     }
 
@@ -65,7 +66,7 @@ public class MemberService {
      *  회원정보 조회
      */
     public Optional<Member> getMemberById(String id) {
-        return memberRepository.findByMemberId(id);
+        return memberRepository.findByMemberNickname(id);
     }
 
     /**
@@ -75,31 +76,25 @@ public class MemberService {
 
         // 조건 => 아이디와 비밀번호가 둘다 같아야함
         // 1) 일단 아이디가 같은 객체를 불러옴
-        Optional<Member> optional = memberRepository.findByMemberId(id);
+        Member member = memberRepository.findByMemberNickname(id).orElseThrow(() -> new RuntimeException("Member not found"));
 
-        String password = optional.get().getMemberPw();
+        String password = member.getMemberPw();
 
         // 2) 입력받은 비밀번호가 같은지 확인하기
         if(bCryptPasswordEncoder.matches(pw, password)) {
             System.out.println("비밀번호 일치");
-            Member member = optional.get();
-            Member data = new Member();
-            data = Member.builder()
-                    .memberId(id)
-                    .memberNo(member.getMemberNo())
+            Member data = Member.builder()
+                    .memberId(member.getMemberId())
+                    .memberNickname(member.getMemberNickname())
                     .memberName(encryptionUtils.decrypt(member.getMemberName()))
                     .memberEmail(encryptionUtils.decrypt(member.getMemberEmail()))
                     .memberPhone(encryptionUtils.decrypt(member.getMemberPhone()))
                     .memberAddr(encryptionUtils.decrypt(member.getMemberAddr()))
                     .role(member.getRole())
                     .build();
-
             return data;
-
-        } else {
-            System.out.println("비밀번호 불일치");
-            return  null;
         }
+        return null;
     }
 
    /**
@@ -113,8 +108,8 @@ public class MemberService {
        QMember qMember = QMember.member;
         // 동적으로 업데이트 문 생성을 위한 JPAUpdateClause 초기화
        JPAUpdateClause update = queryFactory.update(qMember);
-        Member data = memberInfoProcess(member.getMemberId(), member.getMemberPw());
-        long memberNo = data.getMemberNo();
+        Member data = memberInfoProcess(member.getMemberNickname(), member.getMemberPw());
+        long memberId = data.getMemberId();
        String addr = member.getMemberAddr();
        String phone = member.getMemberPhone();
 
@@ -131,7 +126,7 @@ public class MemberService {
 
        // 변경 조건이 하나 이상 있을 때만 실행
        if (phone != null || addr != null) {
-           update.where(qMember.memberNo.eq(memberNo))
+           update.where(qMember.memberId.eq(memberId))
                    .execute();
        }
        return member;

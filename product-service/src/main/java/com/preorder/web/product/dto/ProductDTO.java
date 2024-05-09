@@ -3,8 +3,6 @@ package com.preorder.web.product.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 public class ProductDTO {
@@ -15,13 +13,5 @@ public class ProductDTO {
     private int pdStock;
     private String categoryCode;
     private  String pdStatus;
-
-    public ProductDTO findAllProduct(String pdName, int pdPrice, String pdDescription, String pdStatus) {
-        this.pdName = pdName;
-        this.pdPrice = pdPrice;
-        return this;
-
-    }
-
 
 }

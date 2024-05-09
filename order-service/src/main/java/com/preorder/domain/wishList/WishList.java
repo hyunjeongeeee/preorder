@@ -1,6 +1,5 @@
 package com.preorder.domain.wishList;
 
-import com.preorder.web.wishList.dto.WishListDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,20 +27,8 @@ public class WishList {
     @Column(name = "PD_COUNT", nullable = false)
     private int pdCount;
 
-    public WishList (WishListDTO wishListDTO) {
-//        wishId = wishListDTO.getWishId();
-        pdId = wishListDTO.getPdId();
-        memberNo = wishListDTO.getMemberNo();
-        opId = wishListDTO.getOpId();
-        pdCount = wishListDTO.getPdCount();
-    }
-
-
-
-
     @Builder
     public WishList( int pdId, long memberNo, int opId, int pdCount) {
-//        this.wishId = wishId;
         this.pdId = pdId;
         this.memberNo = memberNo;
         this.opId = opId;

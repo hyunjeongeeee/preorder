@@ -1,31 +1,37 @@
 package com.preorder.domain.product;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Table(name = "PRODUCT")
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Entity
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PD_ID")
-    private int pdId;
+    @Column(name = "PRODUCT_ID")
+    private long productId;
 
-    @Column(name = "PD_NAME", nullable = false, length = 500)
-    private String pdName;
+    @Column(name = "PRODUCT_NAME", nullable = false, length = 500)
+    private String productName;
 
-    @Column(name = "PD_PRICE", nullable = false)
-    private int pdPrice;
+    @Column(name = "PRODUCT_PRICE", nullable = false)
+    private int productPrice;
 
-    @Column(name = "PD_STOCK", nullable = false)
-    private int pdStock;
+    @Setter
+    @Column(name = "PRODUCT_STOCK", nullable = false)
+    private int productStock;
 
-    @Column(name = "PD_DESCRIPTION", length = 1000)
-    private String pdDescription;
+    @Column(name = "PRODUCT_DESCRIPTION", length = 1000)
+    private String productDescription;
 
-    @Column(name = "PD_STATUS", length = 1)
-    private String pdStatus;
+    @Column(name = "PRODUCT_STATUS", length = 1)
+    private String productStatus;
 
 }

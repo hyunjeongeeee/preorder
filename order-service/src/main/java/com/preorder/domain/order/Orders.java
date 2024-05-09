@@ -1,10 +1,7 @@
 package com.preorder.domain.order;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 import org.hibernate.annotations.CurrentTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -15,19 +12,23 @@ import java.time.LocalDate;
 @Table(name = "ORDERS")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @DynamicInsert // 엔티티를 save할 때 null 값은 배제하고 insert 쿼리를 날리도록 한다.
 public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ID")
-    private int orderId;
+    private long orderId;
 
-    @Column(name = "PD_ID", nullable = false)
-    private int pdId;
+    @Column(name = "PRODUCT_ID", nullable = false)
+    private int productId;
 
-    @Column(name = "MEMBER_NO", nullable = false)
-    private int memberNo;
+    @Column(name = "PRODUCT_COUNT", nullable = false)
+    private int productCount;
+
+    @Column(name = "MEMBER_ID", nullable = false)
+    private long memberId;
 
     @Column(name = "ORDER_ADDR", nullable = false, length = 500)
     private String orderAddr;
@@ -41,12 +42,14 @@ public class Orders {
     @Column(name = "ORDER_PRICE", nullable = false)
     private int orderPrice;
 
-    @CurrentTimestamp
-    @Column(name = "ORDER_DATE", nullable = false)
+    @Column(name = "ORDER_DATE", nullable = false, updatable = false)
     private LocalDate orderDate;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "ORDER_STATUS", nullable = false)
     private OrderStatus orderStatus;
+
+
 
 }

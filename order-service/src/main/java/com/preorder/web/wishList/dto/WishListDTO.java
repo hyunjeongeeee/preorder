@@ -18,17 +18,4 @@ public class WishListDTO {
     private int opId;
     private int pdCount;
 
-
-//    @Getter
-//    @Setter
-//    public class WishRequest{
-//        private int pdId;
-//        private int opId;
-//
-//        public WishRequest(int pdId, int opId){
-//            this.pdId = pdId;
-//            this.opId = opId;
-//        }
-//    }
-
 }

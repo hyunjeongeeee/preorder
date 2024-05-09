@@ -20,11 +20,17 @@ configurations {
 	}
 }
 
+
+ext {
+	set('springCloudVersion', "2023.0.0")
+}
+
 dependencyManagement {
 	imports {
-		mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
+
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -64,14 +70,18 @@ dependencies {
 	// java.lang.NoClassDefFoundError (javax.annotation.Generated) 에러 대응 코드
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 	// java.lang.NoClassDefFoundError (javax.annotation.Entity) 에러 대응 코드
+
+
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude group: "org.junit.vintage", module: "junit-vintage-engine"
 	}
 
 
 	// open feign
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 }
+
 
 
 tasks.named('test') {

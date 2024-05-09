@@ -4,7 +4,7 @@ spring:
       mode: always
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/member
+    url: jdbc:mysql://localhost:3307/preorder
     username: admin
     password: 1234
   jpa:

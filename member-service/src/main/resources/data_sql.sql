@@ -1,4 +1,4 @@
-INSERT INTO MEMBER (MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_ADDR, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_STATUS) VALUES
+INSERT INTO MEMBER (MEMBER_ID, MEMBER_NICKNAME, MEMBER_PW, MEMBER_ADDR, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_STATUS) VALUES
                   (1, 'user01', 'pass01', '서울시 강남구', '홍길동', 'user01@example.com', '010-0000-0001', 'USER'),
                   (2, 'user02', 'pass02', '서울시 서초구', '이순신', 'user02@example.com', '010-0000-0002', 'ADMIN'),
                   (3, 'user03', 'pass03', '서울시 종로구', '김유신', 'user03@example.com', '010-0000-0003', 'USER'),

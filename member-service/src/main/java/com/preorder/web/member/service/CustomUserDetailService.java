@@ -3,7 +3,6 @@ package com.preorder.web.member.service;
 import com.preorder.domain.member.Member;
 import com.preorder.web.member.dto.CustomUserDetails;
 import com.preorder.web.member.repository.MemberRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,7 +22,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
 
-        Optional<Member> data = memberRepository.findByMemberId(memberId);
+        Optional<Member> data = memberRepository.findByMemberNickname(memberId);
 
         if(data.isPresent()) {
            return  new CustomUserDetails(data.orElse(null));

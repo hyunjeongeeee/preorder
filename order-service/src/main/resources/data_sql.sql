@@ -1,4 +1,4 @@
-INSERT INTO ORDERS (ORDER_ID, PD_ID, MEMBER_NO, ORDER_ADDR, ORDER_PHONE, ORDER_MEMO, ORDER_PRICE, ORDER_DATE, ORDER_STATUS) VALUES
+INSERT INTO ORDERS (ORDER_ID, PD_ID, MEMBER_ID, ORDER_ADDR, ORDER_PHONE, ORDER_MEMO, ORDER_PRICE, ORDER_DATE, ORDER_STATUS) VALUES
     (1, 1, 1, '서울시 강남구 어딘가', '010-0000-0001', '빠른 배송 부탁드립니다.', 1000000, '2024-01-01', '배송중'),
     (2, 2, 2, '서울시 서초구 어딘가', '010-0000-0002', '주의깊게 포장해주세요.', 800000, '2024-01-02', '배송완료'),
     (3, 3, 3, '서울시 종로구 어딘가', '010-0000-0003', '', 150000, '2024-01-03', '배송전'),
@@ -11,15 +11,15 @@ INSERT INTO ORDERS (ORDER_ID, PD_ID, MEMBER_NO, ORDER_ADDR, ORDER_PHONE, ORDER_M
     (10, 10, 10, '서울시 송파구 어딘가', '010-0000-0010', '빠른 배송 부탁드립니다.', 400000, '2024-01-10', '배송전');
 
 
-INSERT INTO WISHLIST (WISH_ID, PD_ID, MEMBER_NO, OP_ID, PD_COUNT) VALUES
-                                              (1, 1, 1, 1, 2),
-                                              (2, 2, 2, 2, 1),
-                                              (3, 3, 3, 3, 3),
-                                              (4, 4, 4, 4, 1),
-                                              (5, 5, 5, 5, 2),
-                                              (6, 6, 6, 6, 1),
-                                              (7, 7, 7, 7, 1),
-                                              (8, 8, 8, 8, 2),
-                                              (9, 9, 9, 9, 1),
-                                              (10, 10, 10, 10, 1);
+INSERT INTO WISHLIST (WISH_ID, PD_ID, MEMBER_ID, OP_ID, PD_COUNT) VALUES
+                                     (1, 1, 1, 1, 2),
+                                     (2, 2, 2, 2, 1),
+                                     (3, 3, 3, 3, 3),
+                                     (4, 4, 4, 4, 1),
+                                     (5, 5, 5, 5, 2),
+                                     (6, 6, 6, 6, 1),
+                                     (7, 7, 7, 7, 1),
+                                     (8, 8, 8, 8, 2),
+                                     (9, 9, 9, 9, 1),
+                                     (10, 10, 10, 10, 1);
 

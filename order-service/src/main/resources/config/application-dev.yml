@@ -4,7 +4,7 @@ spring:
       mode: always
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/orders
+    url: jdbc:mysql://localhost:3307/preorder
     username: admin
     password: 1234
   jpa:
@@ -21,6 +21,7 @@ spring:
         format_sql: true
         show_sql: true
   #    default_batch_fetch_size: 1000
+  #  매일 낮 12시에 스케쥴러 설정
   mail:
     host: smtp.gmail.com
     username: hyunjeong9592@gamil.com
@@ -32,7 +33,4 @@ security:
     secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
     token-validity-in-seconds: 86400
 
-#logging.level:
-#  org.hibernate.SQL: debug
-#  org.hibernate.type: trace
-#    # parameter Binding
+
