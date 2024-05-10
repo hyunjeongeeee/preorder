@@ -64,10 +64,6 @@ dependencies {
 	// open feign
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
-//	// batch
-//	implementation 'org.springframework.boot:spring-boot-starter-batch'
-//	implementation 'org.springframework.boot:spring-boot-starter-quartz'
-//	testImplementation 'org.springframework.batch:spring-batch-test'
 }
 
 tasks.named('test') {

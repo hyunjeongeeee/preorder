@@ -15,6 +15,10 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    @GetMapping("/service")	public String springCloudService() {
+        return "spring-cloud-service 호출!";
+    }
+
     // 주문 생성 + 재고 감소
     @PostMapping("/api/orders")
     public ResponseEntity<List<Orders>> createOrder(@RequestBody List<Orders> ordersList) {
