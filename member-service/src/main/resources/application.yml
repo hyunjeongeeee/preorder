@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: member-service
   sql:
     init:
       mode: always
@@ -12,14 +14,15 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     defer-datasource-initialization: true
     generate-ddl: true
+    open-in-view: false
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: none
-    properties:
-      hibernate:
-        format_sql: true
-        show_sql: true
+      properties:
+        hibernate:
+          format_sql: true
+          show_sql: true
   mail:
     host: smtp.gmail.com
     username: hyunjeong9592@gamil.com
@@ -30,3 +33,24 @@ security:
     header: Authorization
     secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
     token-validity-in-seconds: 86400
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 5
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+server:
+  port: 8081
+symmetric:
+  key: BEWithMDdfq48fs5113e8fs5q8er4s
+jasypt:
+  encryptor:
+    password: dffsdfq48fs5113e2fws54fq8er4sdf
+    algorithm: PBEWithMD5AndDES

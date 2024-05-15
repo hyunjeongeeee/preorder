@@ -14,25 +14,25 @@ public class WishList {
     @Column(name = "WISH_ID")
     private int wishId;
 
-    @Column(name = "PD_ID", nullable = false)
-    private int pdId;
+    @Column(name = "PRODUCT_ID", nullable = false)
+    private int productId;
 
-    @Column(name = "MEMBER_NO", nullable = false)
-    private long memberNo;
+    @Column(name = "MEMBER_ID", nullable = false)
+    private long memberId;
 
-    @Column(name = "OP_ID", nullable = false)
-    private int opId;
+    @Column(name = "OPTION_ID", nullable = false)
+    private int optionId;
 
     @Setter
-    @Column(name = "PD_COUNT", nullable = false)
-    private int pdCount;
+    @Column(name = "PRODUCT_COUNT", nullable = false)
+    private int productCount;
 
     @Builder
-    public WishList( int pdId, long memberNo, int opId, int pdCount) {
-        this.pdId = pdId;
-        this.memberNo = memberNo;
-        this.opId = opId;
-        this.pdCount = pdCount;
+    public WishList(int productId, long memberId, int optionId, int productCount) {
+        this.productId = productId;
+        this.memberId = memberId;
+        this.optionId = optionId;
+        this.productCount = productCount;
     }
 
 

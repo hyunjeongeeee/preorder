@@ -1,21 +1,18 @@
 package com.preorder.web.wishList.service;
 
 import com.preorder.domain.wishList.WishList;
-import com.preorder.web.wishList.dto.WishListDTO;
 import com.preorder.web.wishList.repository.WishListRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class WishListService {
 
     private final WishListRepository wishListRepository;
-    private final MemberClient memberClient;
 
     // 위시리스트 1개 추가해보기 테스트
 //    public int writeBoard(long memberNo, int pdId, WishListDTO.WishRequest request) {
@@ -32,16 +29,16 @@ public class WishListService {
     @Transactional
     public void addCartProcess(WishList wishList) {
 
-        int pdId = wishList.getPdId();
-        long memberNo = wishList.getMemberNo();
-        int opId = wishList.getOpId();
-        int pdCount = wishList.getPdCount();
+        int pdId = wishList.getProductId();
+        long memberNo = wishList.getMemberId();
+        int opId = wishList.getOptionId();
+        int pdCount = wishList.getProductCount();
 
-        WishList data = wishListRepository.findByMemberNoAndPdIdAndOpId(memberNo, pdId, opId);
+        WishList data = wishListRepository.findByMemberIdAndProductIdAndOptionId(memberNo, pdId, opId);
 
         if (data != null) {
-            int pdTotalCount = data.getPdCount() + pdCount;
-            data.setPdCount(pdTotalCount); // 기존 엔티티 수정
+            int pdTotalCount = data.getProductCount() + pdCount;
+            data.setProductCount(pdTotalCount); // 기존 엔티티 수정
         }
             // 새로운 위시리스트 항목을 생성하는 로직 (옵셔널)
             WishList newWishList = new WishList(pdId, memberNo, opId, pdCount);
@@ -52,8 +49,8 @@ public class WishListService {
     /**
      * 회원정보(PK)로 검색한 위시리스트 전체 목록
      * */
-    public List<WishList> getWishList(long memberNo) {
-        List<WishList> list = wishListRepository.findAllByMemberNo(memberNo);
+    public List<WishList> getWishList(long memberId) {
+        List<WishList> list = wishListRepository.findAllByMemberId(memberId);
         return list;
     }
 

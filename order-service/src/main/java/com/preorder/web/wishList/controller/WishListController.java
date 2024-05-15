@@ -1,7 +1,6 @@
 package com.preorder.web.wishList.controller;
 
 import com.preorder.domain.wishList.WishList;
-import com.preorder.web.wishList.dto.WishListDTO;
 import com.preorder.web.wishList.service.WishListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +29,9 @@ public class WishListController {
      * 상세 페이지 이동
      * 회원정보(PK)로 검색한 위시리스트 전체 목록
      * */
-    @GetMapping("/{memberNo}")
-    public ResponseEntity<List<WishList>> wishList(@PathVariable("memberNo") long memberNo) {
-        List<WishList> list = wishListService.getWishList(memberNo);
+    @GetMapping("/{memberId}")
+    public ResponseEntity<List<WishList>> wishList(@PathVariable("memberId") long memberId) {
+        List<WishList> list = wishListService.getWishList(memberId);
         return ResponseEntity.ok(list);
     }
 

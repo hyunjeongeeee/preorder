@@ -1,11 +1,11 @@
 package com.preorder.web.order.service;
 
+import com.preorder.domain.order.OrderCancel;
 import com.preorder.domain.order.OrderStatus;
 import com.preorder.domain.order.Orders;
 import com.preorder.web.order.dto.ProductResponseDTO;
 import com.preorder.web.order.dto.OrdersResponseDTO;
-import com.preorder.web.order.dto.ProductStockResponse;
-import com.preorder.web.order.dto.StockResponseDTO;
+import com.preorder.web.order.repository.OrderCancelRepository;
 import com.preorder.web.order.repository.OrderRepository;
 import com.preorder.web.feignCient.ProductClient;
 import jakarta.transaction.Transactional;
@@ -21,13 +21,14 @@ import java.util.List;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final OrderCancelRepository orderCancelRepository;
     private final ProductClient productClient;
 
     /**
      * 주문 생성
      * */
     public void createOrder(List<Orders> ordersList) {
-
+        LocalDate today = LocalDate.now();
         for (Orders orders : ordersList) {
             int oneProductPrice = productClient.getProductById(orders.getProductId()).getProductPrice();
             Orders data = Orders.builder()
@@ -38,15 +39,13 @@ public class OrderService {
                     .orderPhone(orders.getOrderPhone())
                     .orderMemo(orders.getOrderMemo())
                     .orderPrice((oneProductPrice * orders.getProductCount()))
+                    .orderDate(today)
                     .build();
-            orderRepository.save(data);
-
             // 주문 수량만큼 마이너스 후 재고 업데이트
-            productClient.updateStock(orders.getProductId(), orders.getProductCount());
+            productClient.getProductStock(orders.getProductId(), orders.getProductCount());
+            orderRepository.save(data);
         }
     }
-
-
 
     /**
      * 주문 조회
@@ -74,16 +73,6 @@ public class OrderService {
     }
 
     /**
-     * 특정 상품 정보
-     * => productClient + orderRepository 활용
-     * */
-//    public StockResponseDTO updateOrderProcess(long orderId) {
-//        Orders orders = orderRepository.findByOrderId(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
-//        ProductStockResponse productStock = productClient.getProductStockById(orders.getProductId());
-//        return new StockResponseDTO(orders, productStock);
-//    }
-
-    /**
      *  매일 자정에 업데이트하는 스케줄러를 설정
      * */
     @Transactional
@@ -103,6 +92,35 @@ public class OrderService {
         orderRepository.saveAll(ordersDeliveredToday);
     }
 
+    /**
+     * 주문 취소
+     * */
+    @Transactional
+    public void cancelOrders (List<OrderCancel> cancelList) {
+        LocalDate today = LocalDate.now();
+        for(OrderCancel cancel : cancelList){
+            Orders orders = orderRepository.findByOrderId(cancel. getOrderId()).orElseThrow(() -> new RuntimeException("Order not found"));
+            OrderCancel data = OrderCancel.builder()
+                    .orderId(cancel.getOrderId())
+                    .memberId(cancel.getMemberId())
+                    .productId(cancel.getProductId())
+                    .optionId(cancel.getOptionId())
+                    .cancelDate(today)
+                    .cancelReason(cancel.getCancelReason())
+                    .build();
+
+            if(orders.getOrderStatus() == OrderStatus.배송전) {
+                orders.setOrderStatus(OrderStatus.취소완료);
+                orderRepository.save(orders);       //  orders 테이블에 상태 변경내역 저장
+            } else {
+                throw new RuntimeException("[배송중]주문취소가 불가능한 상태입니다.");
+            }
+
+            orderCancelRepository.save(data);   // orderCancel 테이블에 취소내역 저장
+            productClient.getProductStockForCancelOrder(cancel.getProductId(), orders.getProductCount());   // product 테이블 재고수정
+        }
+
+    }
 
 
 

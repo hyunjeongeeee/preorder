@@ -19,23 +19,23 @@ spring:
         - id: member-service
           uri: lb://member-service
           predicates:
-            - Path=/api/members/**
+            - Path=/api/member-service/**
           filters:
-            - RewritePath=/members/(?<segment>.*), /$\{segment}
+            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
         - id: order-service
           uri: lb://order-service
           predicates:
-            - Path=/api/orders/**
+            - Path=/api/order-service/**
           filters:
-            - RewritePath=/orders/(?<segment>.*), /$\{segment}
+            - RewritePath=/order-service/(?<segment>.*), /$\{segment}
 #          filters: # 커스텀필터 적용
 #            - CustomAuthFilter
         - id: product-service
           uri: lb://product-service
           predicates:
-            - Path=/api/products/** # 요기로 들어온 요청을 위에 uri로 보냄
+            - Path=/api/product-service/** # 요기로 들어온 요청을 위에 uri로 보냄
           filters:                         #filters-> predicates의 Path를 바꿔서 보내줌
-            - RewritePath=/products/(?<segment>.*), /$\{segment}
+            - RewritePath=/product-service/(?<segment>.*), /$\{segment}
 eureka:
   instance:
     prefer-ip-address: true

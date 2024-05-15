@@ -24,11 +24,31 @@ public class ProductRestController {
 
     /**
      * 재고 수량 관리용
-     * 주문했을경우 수량 -1개 처리
+     * 주문했을경우 수량 -n개 처리
      * */
     @PostMapping("/{productId}/stock")
     public ProductStockRequest updateStock(@PathVariable("productId") long productId, @RequestParam("productCount") int productCount) {
         return productService.updateProductStock(productId, productCount);
     }
+
+    /**
+     * 재고 수량 관리용
+     * 주문취소했을경우 수량 +n개 처리
+     * */
+    @PostMapping("/{productId}/cancelStock")
+    public ProductStockRequest updateStockForCancelOrder(@PathVariable("productId") long productId, @RequestParam("productCount") int productCount) {
+        return productService.cancelProductStock(productId, productCount);
+    }
+
+//    /**
+//     * 재고 수량 관리용
+//     * 주문했을경우 수량 -n개 처리
+//     * */
+//    @PostMapping("/{productId}/stock")
+//    public void updateStock(@PathVariable("productId") long productId, @RequestParam("productCount") int productCount) {
+//        productService.updateProductStock(productId, productCount);
+//    }
+
+
 
 }

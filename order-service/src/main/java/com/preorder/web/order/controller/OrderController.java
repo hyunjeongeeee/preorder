@@ -1,5 +1,6 @@
 package com.preorder.web.order.controller;
 
+import com.preorder.domain.order.OrderCancel;
 import com.preorder.domain.order.Orders;
 import com.preorder.web.order.dto.OrdersResponseDTO;
 import com.preorder.web.order.service.OrderService;
@@ -15,10 +16,6 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @GetMapping("/service")	public String springCloudService() {
-        return "spring-cloud-service 호출!";
-    }
-
     // 주문 생성 + 재고 감소
     @PostMapping("/api/orders")
     public ResponseEntity<List<Orders>> createOrder(@RequestBody List<Orders> ordersList) {
@@ -33,11 +30,9 @@ public class OrderController {
         return ResponseEntity.ok(list);
     }
 
-    // 상품 재고 조정
-//    @PostMapping("/api/orders/{orderId}/stocks")
-//    public ResponseEntity<StockResponseDTO> updateProductStock(@PathVariable("orderId") long orderId) {
-//        StockResponseDTO result =  orderService.updateOrderProcess(orderId);
-//        return ResponseEntity.ok(result);
-//    }
-
+    // 주문 취소 후 상품 재고 조정
+    @PostMapping("/api/orders/cancelStocks")
+    public void updateProductStock(@RequestBody List<OrderCancel> orderCancelList) {
+        orderService.cancelOrders(orderCancelList);
+    }
 }

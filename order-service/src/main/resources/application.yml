@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: order-service
+  sql:
+    init:
+      mode: always
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/preorder
+    username: admin
+    password: 1234
+  data:
+    redis:
+      host: localhost
+      port: 6379
+#      url: jdbc:redis://유저네임:비밀번호@호스트 이름:포트번호
+#      password: 비밀번호
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization: true
+    generate-ddl: true
+    open-in-view: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+      properties:
+        hibernate:
+          format_sql: true
+          show_sql: true
+  mail:
+    host: smtp.gmail.com
+    username: hyunjeong9592@gamil.com
+    password: vussgnwhoasyvlwx
+    port: 465
+security:
+  jwt:
+    header: Authorization
+    secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+    token-validity-in-seconds: 86400
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 5
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+server:
+  port: 8083
+symmetric:
+  key: BEWithMDdfq48fs5113e8fs5q8er4s
+jasypt:
+  encryptor:
+    password: dffsdfq48fs5113e2fws54fq8er4sdf
+    algorithm: PBEWithMD5AndDES

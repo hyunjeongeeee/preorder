@@ -10,5 +10,4 @@ public class ProductRequestDTO {
     private long productId;
     private String productName;
     private int productPrice;
-
 }

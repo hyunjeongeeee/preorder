@@ -19,13 +19,13 @@ public class QWishList extends EntityPathBase<WishList> {
 
     public static final QWishList wishList = new QWishList("wishList");
 
-    public final NumberPath<Long> memberNo = createNumber("memberNo", Long.class);
+    public final NumberPath<Long> memberId = createNumber("memberId", Long.class);
 
-    public final NumberPath<Integer> opId = createNumber("opId", Integer.class);
+    public final NumberPath<Integer> optionId = createNumber("optionId", Integer.class);
 
-    public final NumberPath<Integer> pdCount = createNumber("pdCount", Integer.class);
+    public final NumberPath<Integer> productCount = createNumber("productCount", Integer.class);
 
-    public final NumberPath<Integer> pdId = createNumber("pdId", Integer.class);
+    public final NumberPath<Integer> productId = createNumber("productId", Integer.class);
 
     public final NumberPath<Integer> wishId = createNumber("wishId", Integer.class);
 

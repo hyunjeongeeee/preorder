@@ -4,6 +4,7 @@ import com.preorder.domain.member.Member;
 import com.preorder.domain.member.QMember;
 import com.preorder.web.common.EncryptionUtils;
 import com.preorder.web.member.dto.MemberDTO;
+import com.preorder.web.member.dto.MemberRequestDTO;
 import com.preorder.web.member.repository.MemberRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
@@ -132,5 +133,17 @@ public class MemberService {
        return member;
    }
 
+   /**
+    * 주문을 위한 회원정보 반환
+    * */
+//    public MemberRequestDTO findForOrderService(long memberId) {
+//        Member member = memberRepository.findById(memberId).orElseThrow(() -> new RuntimeException("Member not found"));
+//        MemberRequestDTO memberRequestDTO = MemberRequestDTO.builder()
+//                .memberId(memberId)
+//                .memberAddr(encryptionUtils.decrypt(member.getMemberAddr()))
+//                .memberPhone(encryptionUtils.decrypt(member.getMemberPhone()))
+//                .build();
+//        return memberRequestDTO;
+//   }
 
 }

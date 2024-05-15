@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 public class MemberDTO {
 
-    private long memberNo;
+    private long memberId;
     private String memberNickname;
     private String memberPw;
     private String memberName;
@@ -18,10 +18,5 @@ public class MemberDTO {
     private String memberPhone;
     private Role role;
     private EncryptionUtils encryptionUtils;
-
-    public MemberDTO() {}
-
-
-
 
 }
