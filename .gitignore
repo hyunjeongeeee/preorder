@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 
 *.properties
-member-service/src/main/resources/config/
+*/*/generated
 
 
 
