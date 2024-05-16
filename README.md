@@ -18,7 +18,8 @@
 
 🛠 ERD
 ---
-![preorder-project-erd.png](img_2.png)
+![preorder-project-erd.png](![Copy of Copy of Copy of 예약구매멀티모듈3차수정](https://github.com/hyunjeongeeee/preorder/assets/144875940/975eb6ae-dbc8-4402-8304-262d1e94ace7)
+)
 
 💡 기술스택
 ---
