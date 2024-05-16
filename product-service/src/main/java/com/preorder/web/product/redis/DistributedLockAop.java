@@ -1,5 +1,7 @@
 package com.preorder.web.product.redis;
 
+import com.preorder.web.product.error.CustomException;
+import com.preorder.web.product.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -33,7 +35,7 @@ public class DistributedLockAop {
 
         String key = REDISSON_LOCK_PREFIX + CustomSpringELParser.getDynamicValue(signature.getParameterNames(), joinPoint.getArgs(), distributedLock.key());
         RLock rLock = redissonClient.getLock(key);  // (1)
-
+        log.info("[락 획득]");
         try {
             boolean available = rLock.tryLock(distributedLock.waitTime(), distributedLock.leaseTime(), distributedLock.timeUnit());  // (2)
             if (!available) {
@@ -41,13 +43,15 @@ public class DistributedLockAop {
             }
             return aopForTransaction.proceed(joinPoint);  // (3) lock을 걸고싶은 메서드가 실행되는곳
         } catch (InterruptedException e) {
-            throw new InterruptedException();
+            log.info("[락 획득 불가]");
+            throw new CustomException(ErrorCode.LOCK_INTERRUPTED_ERROR);
+//            throw new InterruptedException();
         } finally {
             try {
                 rLock.unlock();   // (4)
             } catch (IllegalMonitorStateException e) {
-                log.info("Redisson Lock Already UnLock {} {}",method.getName(), key
-                );
+                log.info("Redisson Lock Already UnLock {} {}",method.getName(), key);
+                throw new CustomException(ErrorCode.UNLOCKING_A_LOCK_WHICH_IS_NOT_LOCKED);
             }
         }
     }

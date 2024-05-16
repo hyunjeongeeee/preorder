@@ -9,3 +9,7 @@ INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STOCK, PRO
              (8, '램', 80000, 40, '16GB DDR4 RAM', 'Y'),
              (9, '외장하드', 120000, 30, '1TB 외장하드', 'Y'),
              (10, '프린터', 400000, 5, '컬러 레이저 프린터', 'Y');
+             
+             
+INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STOCK, PRODUCT_DESCRIPTION, PRODUCT_STATUS) VALUES
+             (11, '노트북', 1000000, 5000, '고성능 노트북', 'Y');

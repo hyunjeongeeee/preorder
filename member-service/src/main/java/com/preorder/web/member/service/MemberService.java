@@ -4,7 +4,6 @@ import com.preorder.domain.member.Member;
 import com.preorder.domain.member.QMember;
 import com.preorder.web.common.EncryptionUtils;
 import com.preorder.web.member.dto.MemberDTO;
-import com.preorder.web.member.dto.MemberRequestDTO;
 import com.preorder.web.member.repository.MemberRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
@@ -21,8 +20,6 @@ public class MemberService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final EncryptionUtils encryptionUtils;
     private final EntityManager entityManager;
-
-
 
     public MemberService(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
                          EncryptionUtils encryptionUtils ,EntityManager entityManager) {
@@ -49,8 +46,7 @@ public class MemberService {
         if (isExist) {
             return ;
         }
-        Member data = new Member();
-        data = Member.builder()
+        Member data = Member.builder()
                 .memberNickname(nickName)
                 .memberPw(bCryptPasswordEncoder.encode(password))
                 .memberName(encryptionUtils.encrypt(name))
@@ -59,7 +55,7 @@ public class MemberService {
                 .memberAddr(encryptionUtils.encrypt(address))
                 .build();
         memberRepository.save(data);
-        System.out.println("저장된 회원 정보 : "+data);
+        System.out.println("저장된 회원 정보 : " + data);
 
     }
 

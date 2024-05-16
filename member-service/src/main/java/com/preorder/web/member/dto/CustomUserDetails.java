@@ -25,11 +25,8 @@ public class CustomUserDetails implements UserDetails {
                 return String.valueOf(member.getRole());
             }
         });
-
         return collection;
     }
-
-
 
     @Override
     public String getPassword() {

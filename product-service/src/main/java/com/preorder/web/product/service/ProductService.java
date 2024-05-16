@@ -66,7 +66,9 @@ public class ProductService {
             product.setProductStock(newProductCount);
         }
         productRepository.save(product);  // 주문 수량만큼 빼고 수량 업데이트(저장)
+        new CustomException(ErrorCode.LOCK_NOT_AVAILABLE);
         return new ProductStockRequest(product.getProductId(), product.getProductStock());
+
     }
 
 

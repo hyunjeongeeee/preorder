@@ -1,5 +1,6 @@
 package com.preorder.web.common;
 
+import com.preorder.web.member.jwt.JWTUtil;
 import com.preorder.web.member.jwt.LoginFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,8 +15,8 @@ import org.springframework.security.crypto.encrypt.AesBytesEncryptor;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     // 대칭키
@@ -23,9 +24,12 @@ public class SecurityConfig {
     private String symmetrickey;
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    //JWTUtil 주입
+    private final JWTUtil jwtUtil;
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration) {
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil) {
         this.authenticationConfiguration = authenticationConfiguration;
+        this.jwtUtil = jwtUtil;
     }
 
     //  AuthenticationManager 가 인자로 받을 AuthenticationConfiguration 등록
@@ -70,7 +74,7 @@ public class SecurityConfig {
 
         // 필터 추가 LoginFilter()는 인자를 받음authenticationManager() 메소드에 authenticationConfiguration 인자
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter (authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         // 세션 설정
         http

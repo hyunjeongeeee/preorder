@@ -21,7 +21,7 @@ public class MemberController {
      * 회원가입
      * */
     @PostMapping("/join")
-    public String joinProcess(MemberDTO memberDTO) {
+    public String memberJoin(MemberDTO memberDTO) {
         memberService.joinProcess(memberDTO);
         return "가입완료";
     }
