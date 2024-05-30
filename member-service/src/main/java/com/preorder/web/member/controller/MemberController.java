@@ -27,7 +27,7 @@ public class MemberController {
     }
 
     /**
-     * 회원정보  => 암호화된것 복호화해서 보여줌
+     * 회원정보  => 암호화된것 복호화해서 보여줌(테스트)
      * */
     @PostMapping("/{memberId}")
     public ResponseEntity<Member> updateInfo(@PathVariable("memberId") String memberId,

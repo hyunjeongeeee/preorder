@@ -32,7 +32,7 @@ public class RegisterMail implements EmailServiceInter {
         message.setSubject("[Fligent] 비밀번호 변경을 위한 이메일 인증코드 입니다"); // 이메일 제목
 
         String msgg = "";
-        msgg += "<h1>《♡‥오직너어l거l만㈜ヱ싶은거ØF‥♡》</h1>";
+        msgg += "<h1>PREORDER PROJECT Authentication code ☁︎</h1>";
         msgg += "<br>";
         msgg += "<p>아래 인증코드를 페이지에 입력해주세요</p>";
         msgg += "<br>";

@@ -1,8 +1,8 @@
 version: "3.9"
 services:
   mysql-db:
-    image: mysql:8.0.28
-    container_name: mysql-db-container
+    image: mysql:latest
+    container_name: mysql-container
     restart: always
     ports:
       - "3307:3306"	# mysql 기본 port

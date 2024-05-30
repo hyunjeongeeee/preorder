@@ -49,9 +49,12 @@
 * API Gateway 추가
   <br>➡ 시스템의 안정성과 서비스 관리의 용이성을 위해 API Gateway를 추가
 
-✒️ API 명세서
----
-* [API명세 상세내용 보러가기](https://sweet-number-410.notion.site/API-8c6bb12325a24c6fa1dc9fb2f031ae9e?pvs=4)
+[//]: # ()
+[//]: # (✒️ API 명세서)
+
+[//]: # (---)
+
+[//]: # (* [API명세 상세내용 보러가기]&#40;https://sweet-number-410.notion.site/API-8c6bb12325a24c6fa1dc9fb2f031ae9e?pvs=4&#41;)
 <br>
 
 ### 🍀 프로젝트 기록 및 트러블슈팅 ➡ [VELOG 보러가기](https://velog.io/@hyunjeong9592/series) 
