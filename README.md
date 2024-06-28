@@ -57,5 +57,5 @@
 [//]: # (* [API명세 상세내용 보러가기]&#40;https://sweet-number-410.notion.site/API-8c6bb12325a24c6fa1dc9fb2f031ae9e?pvs=4&#41;)
 <br>
 
-### 🍀 프로젝트 기록 및 트러블슈팅 ➡ [VELOG 보러가기](https://velog.io/@hyunjeong9592/series) 
+### 🌈 프로젝트 기록 및 트러블슈팅 ➡ [VELOG 보러가기](https://velog.io/@hyunjeong9592/series) 
 
