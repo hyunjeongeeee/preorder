@@ -22,14 +22,14 @@ public class RegisterMail implements EmailServiceInter {
 
     // 메일 내용 작성
     @Override
-    public MimeMessage creatMessage(String to) throws MessagingException, UnsupportedEncodingException {
+    public MimeMessage creatMessage(String to) throws MessagingException {
         System.out.println("메일받을 사용자" + to);
         System.out.println("인증번호" + ePw);
 
         MimeMessage message = emailSender.createMimeMessage();
 
         message.addRecipients(MimeMessage.RecipientType.TO, to); // 메일 받을 사용자
-        message.setSubject("[Fligent] 비밀번호 변경을 위한 이메일 인증코드 입니다"); // 이메일 제목
+        message.setSubject("회원가입을 위한 이메일 인증코드 입니다."); // 이메일 제목
 
         String msgg = "";
         msgg += "<h1>PREORDER PROJECT Authentication code ☁︎</h1>";
@@ -42,13 +42,9 @@ public class RegisterMail implements EmailServiceInter {
         msgg += "<div style='font-size:130%'>";
         msgg += "<strong>" + ePw + "</strong></div><br/>" ; // 메일에 인증번호 ePw 넣기
         msgg += "</div>";
-        // msgg += "<img src=../resources/static/image/emailfooter.jpg />"; // footer image
 
         message.setText(msgg, "utf-8", "html"); // 메일 내용, charset타입, subtype
-        // 보내는 사람의 이메일 주소, 보내는 사람 이름
-        message.setFrom(new InternetAddress("mah95@naver.com", "Fligent_Admin"));
         log.info("===========creatMessage 함수에서 생성된 msgg 메시지===========" + msgg);
-
         log.info("===========creatMessage 함수에서 생성된 리턴 메시지===========" + message);
 
         return message;
